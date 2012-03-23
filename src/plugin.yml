@@ -6,6 +6,6 @@ commands:
     description: Flight command.
     usage: /fly [player]
 permissions:
-  superman.fly:
+  flight.fly:
     description: Allows use of the fly command.
     default: op
