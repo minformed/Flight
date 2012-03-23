@@ -4,7 +4,7 @@ version: 0.1
 commands:
   flight:
     description: Flight command.
-    usage: /fly [player]
+    usage: /fly [command] [arg]
 permissions:
   flight.self:
     description: Allows use of the fly command.

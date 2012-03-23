@@ -43,13 +43,13 @@ public class Flight extends JavaPlugin {
         Player player = (Player) sender;
 
         if (args.length == 0) {
+            sender.sendMessage(cHandler.pre + ChatColor.GREEN + "by ryanclancy000");
+            return true;
         }
 
         // Help Command
         
         if ("help".equalsIgnoreCase(args[0])) {
-
-            isCreative(player);
 
             if (!sender.hasPermission("flight.help")) {
                 noPerms(sender);
@@ -65,8 +65,6 @@ public class Flight extends JavaPlugin {
         
         if ("toggle".equalsIgnoreCase(args[0])) {
 
-            isCreative(player);
-
             if (!sender.hasPermission("flight.toggle")) {
                 noPerms(sender);
                 return true;
@@ -75,12 +73,34 @@ public class Flight extends JavaPlugin {
             this.cHandler.toggleCommand(sender, args);
             return true;
         }
+        
+        if ("on".equalsIgnoreCase(args[0])) {
+            
+            if (!sender.hasPermission("flight.on")) {
+                noPerms(sender);
+                return true;
+            }
+
+            this.cHandler.flyOn(sender, args);
+            return true;
+            
+        }
+        
+        if ("off".equalsIgnoreCase(args[0])) {
+            
+            if (!sender.hasPermission("flight.off")) {
+                noPerms(sender);
+                return true;
+            }
+
+            this.cHandler.flyOff(sender, args);
+            return true;
+            
+        }
 
         // Check Command
         
         if ("check".equalsIgnoreCase(args[0])) {
-
-            isCreative(player);
 
             if (!sender.hasPermission("flight.check")) {
                 noPerms(sender);
@@ -97,13 +117,5 @@ public class Flight extends JavaPlugin {
     public void noPerms(CommandSender sender) {
         sender.sendMessage(ChatColor.RED + "You do not have permission for that command...");
     }
-
-    public boolean isCreative(Player player) {
-
-        if (player.getGameMode() == GameMode.CREATIVE) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    
 }
