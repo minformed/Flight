@@ -1,0 +1,11 @@
+name: SuperMan
+main: me.ryanclancy000.flight.Flight
+version: 0.1
+commands:
+  fly:
+    description: Flight command.
+    usage: /fly [player]
+permissions:
+  superman.fly:
+    description: Allows use of the fly command.
+    default: op
