@@ -110,6 +110,20 @@ public class Flight extends JavaPlugin {
             this.cHandler.checkCommand(sender, args);
             return true;
         }
+        
+        // List Command
+        
+        if ("list".equalsIgnoreCase(args[0])) {
+            
+            if (!sender.hasPermission("flight.list")) {
+                noPerms(sender);
+                return true;
+            }
+            
+            this.cHandler.listCommand(sender, args);
+            return true;
+            
+        }
 
         return false;
     }
