@@ -300,7 +300,7 @@ public class FlightCommands {
             }
 
             if (p.getAllowFlight()) {
-                s.append(p.getName());
+                s.append(green + p.getName());
             }
         }
         sender.sendMessage(pre + green + "Flight Mode Enabled: " + s);
