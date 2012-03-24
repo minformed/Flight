@@ -4,7 +4,8 @@ version: 0.1
 commands:
   flight:
     description: Flight command.
-    usage: /fly [command] [arg]
+    aliases: fly
+    usage: /flight [command] [arg]
 permissions:
   flight.self:
     description: Allows use of the fly command.

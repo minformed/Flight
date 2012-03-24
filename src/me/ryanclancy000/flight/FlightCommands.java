@@ -1,5 +1,6 @@
 package me.ryanclancy000.flight;
 
+import java.util.ArrayList;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -29,6 +30,8 @@ public class FlightCommands {
         sender.sendMessage(pre + green + "Help Menu!");
         sender.sendMessage(yellow + "/flight " + green + "toggle [player] - " + yellow + "Toggles flight.");
         sender.sendMessage(yellow + "/flight " + green + "check [player] - " + yellow + "Checks flight status.");
+        sender.sendMessage(yellow + "/flight " + green + "on [player] - " + yellow + "Enable flight.");
+        sender.sendMessage(yellow + "/flight " + green + "off [player] - " + yellow + "Disabled flight.");
 
     }
 
@@ -40,7 +43,7 @@ public class FlightCommands {
             Player player = (Player) sender;
 
             if (isCreative(player)) {
-                player.sendMessage(pre + ChatColor.RED + "Cannot change flight mode while in creative!");
+                player.sendMessage(pre + red + "Cannot change flight mode while in creative!");
                 return;
             }
 
@@ -69,7 +72,7 @@ public class FlightCommands {
 
                 if (target.getAllowFlight()) {
                     disableFly(target);
-
+                    
                     if (target.getName().equalsIgnoreCase(sender.getName())) {
                         sender.sendMessage(pre + red + "Flying disabled!");
                         return;
@@ -110,7 +113,7 @@ public class FlightCommands {
             Player player = (Player) sender;
 
             if (isCreative(player)) {
-                player.sendMessage(pre + ChatColor.RED + "Cannot change flight mode while in creative!");
+                player.sendMessage(pre + red + "Cannot change flight mode while in creative!");
                 return;
             }
 
@@ -138,6 +141,7 @@ public class FlightCommands {
 
                 if (flyModeEnabled(target)) {
                     target.sendMessage(pre + red + "Fly mode already on!");
+                    sender.sendMessage(pre + red + "Fly mode already on for " + target.getName());
                     return;
                 }
 
@@ -157,20 +161,20 @@ public class FlightCommands {
                 return;
             }
         }
-        
+
         sender.sendMessage(pre + red + "Too many arguments!");
         return;
 
     }
 
     public void flyOff(CommandSender sender, String[] args) {
-        
+
         if (args.length == 1) {
 
             Player player = (Player) sender;
 
             if (isCreative(player)) {
-                player.sendMessage(pre + ChatColor.RED + "Cannot change flight mode while in creative!");
+                player.sendMessage(pre + red + "Cannot change flight mode while in creative!");
                 return;
             }
 
@@ -180,7 +184,7 @@ public class FlightCommands {
             }
 
             disableFly(player);
-            sender.sendMessage(pre + green + "Flying disabled!");
+            sender.sendMessage(pre + red + "Flying disabled!");
             return;
 
         }
@@ -198,18 +202,19 @@ public class FlightCommands {
 
                 if (!flyModeEnabled(target)) {
                     target.sendMessage(pre + red + "Fly mode already off!");
+                    sender.sendMessage(pre + red + "Fly mode already off for " + target.getName());
                     return;
                 }
 
                 disableFly(target);
 
                 if (target.getName().equalsIgnoreCase(sender.getName())) {
-                    sender.sendMessage(pre + green + "Flying disabled!");
+                    sender.sendMessage(pre + red + "Flying disabled!");
                     return;
                 }
 
-                sender.sendMessage(pre + green + "Flying disabled for " + target.getName());
-                target.sendMessage(pre + green + "Flying disabled by " + sender.getName());
+                sender.sendMessage(pre + red + "Flying disabled for " + target.getName());
+                target.sendMessage(pre + red + "Flying disabled by " + sender.getName());
                 return;
 
             } catch (Exception e) {
@@ -217,11 +222,11 @@ public class FlightCommands {
                 return;
             }
         }
-        
+
         sender.sendMessage(pre + red + "Too many arguments!");
         return;
 
-        
+
     }
 
     public void checkCommand(CommandSender sender, String[] args) {
@@ -230,17 +235,17 @@ public class FlightCommands {
 
         if (args.length == 1) {
 
-            if (flyModeEnabled(player) && !currentlyFlying(player)) {
-                sender.sendMessage(pre + green + "Fly mode is enabled, but you are not in the air!");
+            if (isCreative(player)) {
+                sender.sendMessage(pre + red + "You are in creative, of course fly mode is enabled!");
                 return;
             }
 
-            if (currentlyFlying(player)) {
-                sender.sendMessage(pre + green + "You are currently in flight!");
+            if (flyModeEnabled(player)) {
+                sender.sendMessage(pre + green + "Your fly mode is enabled!");
                 return;
             }
 
-            sender.sendMessage(pre + green + "Fly mode is disabled!");
+            sender.sendMessage(pre + red + "Your fly mode is disabled!");
             return;
 
         }
@@ -250,13 +255,27 @@ public class FlightCommands {
             Player target = Bukkit.getServer().getPlayer(args[1]);
 
             try {
+
+                if (isCreative(target)) {
+                    sender.sendMessage(pre + red + target.getName() + " is in creative, of course fly mode is enabled!");
+                    return;
+                }
+
+                if (flyModeEnabled(target)) {
+                    sender.sendMessage(pre + green + target.getName() + " has fly mode enabled!");
+                    return;
+                } else {
+                    sender.sendMessage(pre + red + target.getName() + " has fly mode disabled!");
+                    return;
+                }
+
             } catch (Exception e) {
                 sender.sendMessage(pre + red + "Player not online!");
                 return;
             }
 
         }
-
+        
         sender.sendMessage(pre + red + "Too many arguments!");
         return;
 
