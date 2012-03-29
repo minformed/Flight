@@ -43,6 +43,7 @@ public class Flight extends JavaPlugin {
 
         if (args.length == 0) {
             sender.sendMessage(cHandler.pre + ChatColor.GREEN + "by ryanclancy000");
+            sender.sendMessage(cHandler.yellow + "- To view commands, do /flight " + cHandler.green + "help");
             return true;
         }
 
@@ -73,6 +74,8 @@ public class Flight extends JavaPlugin {
             return true;
         }
 
+        // On Command
+        
         if ("on".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.on")) {
@@ -85,6 +88,8 @@ public class Flight extends JavaPlugin {
 
         }
 
+        // Off Command
+        
         if ("off".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.off")) {
