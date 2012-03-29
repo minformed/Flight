@@ -62,7 +62,7 @@ public class FlightCommands {
 
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 && sender.hasPermission("flight.toggle.other")) {
 
             Player target = Bukkit.getServer().getPlayer(args[1]);
 
@@ -103,8 +103,12 @@ public class FlightCommands {
             }
 
         }
-
-        sender.sendMessage(pre + red + "Too many arguments");
+        
+        if (args.length > 2) {
+            sender.sendMessage(pre + red + "Too many arguments!");
+        }
+        
+        sender.sendMessage(red + "You do not have permission to do that...");
         return;
 
     }
@@ -131,7 +135,7 @@ public class FlightCommands {
 
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 && sender.hasPermission("flight.on.other")) {
 
             Player target = Bukkit.getServer().getPlayer(args[1]);
 
@@ -143,7 +147,6 @@ public class FlightCommands {
                 }
 
                 if (flyModeEnabled(target)) {
-                    target.sendMessage(pre + red + "Flight already on!");
                     sender.sendMessage(pre + red + "Flight already on for " + target.getName());
                     return;
                 }
@@ -164,8 +167,12 @@ public class FlightCommands {
                 return;
             }
         }
+        
+        if (args.length > 2) {
+            sender.sendMessage(pre + red + "Too many arguments!");
+        }
 
-        sender.sendMessage(pre + red + "Too many arguments!");
+        sender.sendMessage(red + "You do not have permission to do that...");
         return;
 
     }
@@ -192,7 +199,7 @@ public class FlightCommands {
 
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 && sender.hasPermission("flight.off.other")) {
 
             Player target = Bukkit.getServer().getPlayer(args[1]);
 
@@ -204,7 +211,6 @@ public class FlightCommands {
                 }
 
                 if (!flyModeEnabled(target)) {
-                    target.sendMessage(pre + red + "Flight already off!");
                     sender.sendMessage(pre + red + "Flight already off for " + target.getName());
                     return;
                 }
@@ -225,10 +231,13 @@ public class FlightCommands {
                 return;
             }
         }
-
-        sender.sendMessage(pre + red + "Too many arguments!");
+        
+        if (args.length > 2) {
+            sender.sendMessage(pre + red + "Too many arguments!");
+        }
+        
+        sender.sendMessage(red + "You do not have permission to do that...");
         return;
-
 
     }
 
@@ -253,7 +262,7 @@ public class FlightCommands {
 
         }
 
-        if (args.length == 2) {
+        if (args.length == 2 && sender.hasPermission("flight.check.other")) {
 
             Player target = Bukkit.getServer().getPlayer(args[1]);
 
@@ -278,8 +287,12 @@ public class FlightCommands {
             }
 
         }
+        
+        if (args.length > 2) {
+            sender.sendMessage(pre + red + "Too many arguments!");
+        }
 
-        sender.sendMessage(pre + red + "Too many arguments!");
+        sender.sendMessage(red + "You do not have permission to do that...");
         return;
 
     }
