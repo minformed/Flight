@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 public class FlightListener implements Listener {
 
     public Flight plugin;
-    public FlightCommands cHandler;
+    public Util u;
 
     public FlightListener(Flight instance) {
         this.plugin = instance;
@@ -18,10 +18,10 @@ public class FlightListener implements Listener {
 
         Entity entity = event.getEntity();
         if (event.getEntity() instanceof Player) {
-           
+
             Player player = (Player) entity;
-            
-            if (cHandler.flyModeEnabled(player)) {
+
+            if (u.flyModeEnabled(player)) {
                 event.setCancelled(true);
             }
 

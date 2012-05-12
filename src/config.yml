@@ -1,3 +1,5 @@
 god-mode: true
 allowed-worlds:
   - world
+enabled-players:
+  - notch

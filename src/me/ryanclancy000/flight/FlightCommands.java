@@ -2,7 +2,6 @@ package me.ryanclancy000.flight;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,6 +13,7 @@ public class FlightCommands {
     ChatColor white = ChatColor.WHITE;
     ChatColor red = ChatColor.RED;
     public Flight plugin;
+    public Util u;
 
     public FlightCommands(Flight instance) {
         this.plugin = instance;
@@ -38,22 +38,22 @@ public class FlightCommands {
 
     // Toggle Command
     public void toggleCommand(CommandSender sender, String[] args) {
-        
+
         if (args.length == 1) {
 
             Player player = (Player) sender;
 
-            if (isCreative(player)) {
+            if (u.isCreative(player)) {
                 player.sendMessage(pre + red + "Cannot change flight while in creative!");
                 return;
             }
 
             if (player.getAllowFlight()) {
-                disableFly(player);
+                u.disableFly(player);
                 player.sendMessage(pre + red + "Flight disabled!");
                 return;
             } else {
-                enableFly(player);
+                u.enableFly(player);
                 player.sendMessage(pre + green + "Flight enabled!");
                 return;
             }
@@ -66,13 +66,13 @@ public class FlightCommands {
 
             try {
 
-                if (isCreative(target)) {
+                if (u.isCreative(target)) {
                     sender.sendMessage(pre + red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                     return;
                 }
 
                 if (target.getAllowFlight()) {
-                    disableFly(target);
+                    u.disableFly(target);
 
                     if (target.getName().equalsIgnoreCase(sender.getName())) {
                         sender.sendMessage(pre + red + "Flight disabled!");
@@ -83,7 +83,7 @@ public class FlightCommands {
                     target.sendMessage(pre + red + "Flight disabled by " + sender.getName());
                     return;
                 } else {
-                    enableFly(target);
+                    u.enableFly(target);
 
                     if (target.getName().equalsIgnoreCase(sender.getName())) {
                         sender.sendMessage(pre + green + "Flight enabled!");
@@ -101,11 +101,11 @@ public class FlightCommands {
             }
 
         }
-        
+
         if (args.length > 2) {
             sender.sendMessage(pre + red + "Too many arguments!");
         }
-        
+
         sender.sendMessage(red + "You do not have permission to do that...");
         return;
 
@@ -117,17 +117,17 @@ public class FlightCommands {
 
             Player player = (Player) sender;
 
-            if (isCreative(player)) {
+            if (u.isCreative(player)) {
                 player.sendMessage(pre + red + "Cannot change flight while in creative!");
                 return;
             }
 
-            if (flyModeEnabled(player)) {
+            if (u.flyModeEnabled(player)) {
                 player.sendMessage(pre + red + "Flight already on!");
                 return;
             }
 
-            enableFly(player);
+            u.enableFly(player);
             sender.sendMessage(pre + green + "Flight enabled!");
             return;
 
@@ -139,17 +139,17 @@ public class FlightCommands {
 
             try {
 
-                if (isCreative(target)) {
+                if (u.isCreative(target)) {
                     sender.sendMessage(pre + red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                     return;
                 }
 
-                if (flyModeEnabled(target)) {
+                if (u.flyModeEnabled(target)) {
                     sender.sendMessage(pre + red + "Flight already on for " + target.getName());
                     return;
                 }
 
-                enableFly(target);
+                u.enableFly(target);
 
                 if (target.getName().equalsIgnoreCase(sender.getName())) {
                     sender.sendMessage(pre + green + "Flight enabled!");
@@ -165,7 +165,7 @@ public class FlightCommands {
                 return;
             }
         }
-        
+
         if (args.length > 2) {
             sender.sendMessage(pre + red + "Too many arguments!");
         }
@@ -181,17 +181,17 @@ public class FlightCommands {
 
             Player player = (Player) sender;
 
-            if (isCreative(player)) {
+            if (u.isCreative(player)) {
                 player.sendMessage(pre + red + "Cannot change flight while in creative!");
                 return;
             }
 
-            if (!flyModeEnabled(player)) {
+            if (!u.flyModeEnabled(player)) {
                 player.sendMessage(pre + red + "Flight already off!");
                 return;
             }
 
-            disableFly(player);
+            u.disableFly(player);
             sender.sendMessage(pre + red + "Flight disabled!");
             return;
 
@@ -203,17 +203,17 @@ public class FlightCommands {
 
             try {
 
-                if (isCreative(target)) {
+                if (u.isCreative(target)) {
                     sender.sendMessage(pre + red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                     return;
                 }
 
-                if (!flyModeEnabled(target)) {
+                if (!u.flyModeEnabled(target)) {
                     sender.sendMessage(pre + red + "Flight already off for " + target.getName());
                     return;
                 }
 
-                disableFly(target);
+                u.disableFly(target);
 
                 if (target.getName().equalsIgnoreCase(sender.getName())) {
                     sender.sendMessage(pre + red + "Flight disabled!");
@@ -229,11 +229,11 @@ public class FlightCommands {
                 return;
             }
         }
-        
+
         if (args.length > 2) {
             sender.sendMessage(pre + red + "Too many arguments!");
         }
-        
+
         sender.sendMessage(red + "You do not have permission to do that...");
         return;
 
@@ -245,12 +245,12 @@ public class FlightCommands {
 
         if (args.length == 1) {
 
-            if (isCreative(player)) {
+            if (u.isCreative(player)) {
                 sender.sendMessage(pre + red + "You are in creative, of course mode is enabled!");
                 return;
             }
 
-            if (flyModeEnabled(player)) {
+            if (u.flyModeEnabled(player)) {
                 sender.sendMessage(pre + green + "Your flight is enabled!");
                 return;
             }
@@ -266,12 +266,12 @@ public class FlightCommands {
 
             try {
 
-                if (isCreative(target)) {
+                if (u.isCreative(target)) {
                     sender.sendMessage(pre + red + target.getName() + " is in creative, of course flight is enabled!");
                     return;
                 }
 
-                if (flyModeEnabled(target)) {
+                if (u.flyModeEnabled(target)) {
                     sender.sendMessage(pre + green + target.getName() + " has flight enabled!");
                     return;
                 } else {
@@ -285,7 +285,7 @@ public class FlightCommands {
             }
 
         }
-        
+
         if (args.length > 2) {
             sender.sendMessage(pre + red + "Too many arguments!");
         }
@@ -318,44 +318,5 @@ public class FlightCommands {
         return;
 
 
-    }
-
-    public void enableFly(Player player) {
-        player.setAllowFlight(true);
-        player.setFlying(true);
-    }
-
-    public void disableFly(Player player) {
-        player.setAllowFlight(false);
-        player.setFlying(false);
-    }
-
-    public boolean flyModeEnabled(Player player) {
-
-        if (player.getAllowFlight()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    public boolean currentlyFlying(Player player) {
-
-        if (player.isFlying()) {
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    public boolean isCreative(Player player) {
-
-        if (player.getGameMode() == GameMode.CREATIVE) {
-            return true;
-        } else {
-            return false;
-        } 
     }
 }

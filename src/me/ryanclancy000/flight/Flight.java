@@ -13,6 +13,7 @@ public class Flight extends JavaPlugin {
     private FlightCommands cHandler = new FlightCommands(this);
     public boolean godMode;
     //public List allowedWorlds;
+    public List enablePlayers;
 
     @Override
     public void onDisable() {
@@ -26,11 +27,12 @@ public class Flight extends JavaPlugin {
             this.getConfig().options().copyDefaults(true);
             godMode = this.getConfig().getBoolean("god-mode");
             //allowedWorlds = this.getConfig().getList("allowed-worlds");
+            enablePlayers = this.getConfig().getList("enabled-players");
             this.saveConfig();
         } catch (Exception ex) {
             this.getLogger().severe("Could not load config!");
         }
-        
+
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
@@ -87,7 +89,7 @@ public class Flight extends JavaPlugin {
         }
 
         // On Command
-        
+
         if ("on".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.on")) {
@@ -101,7 +103,7 @@ public class Flight extends JavaPlugin {
         }
 
         // Off Command
-        
+
         if ("off".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.off")) {
