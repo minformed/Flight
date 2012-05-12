@@ -14,7 +14,7 @@ public class Util {
     public void enableFly(Player player) {
         player.setAllowFlight(true);
         player.setFlying(true);
-        if (!plugin.enablePlayers.contains(player.getName())) {
+        if (!plugin.enablePlayers.contains(player.getName()) && plugin.useEnabledPlayers) {
             plugin.enablePlayers.add(player.getName());
         }
     }
@@ -22,7 +22,7 @@ public class Util {
     public void disableFly(Player player) {
         player.setAllowFlight(false);
         player.setFlying(false);
-        if (plugin.enablePlayers.contains(player.getName())) {
+        if (plugin.enablePlayers.contains(player.getName()) && plugin.useEnabledPlayers) {
             plugin.enablePlayers.remove(player.getName());
         }
     }
