@@ -16,7 +16,7 @@ public class FlightCommands {
     public Flight plugin;
 
     public FlightCommands(Flight instance) {
-        plugin = instance;
+        this.plugin = instance;
     }
 
     // Help Command
@@ -38,7 +38,7 @@ public class FlightCommands {
 
     // Toggle Command
     public void toggleCommand(CommandSender sender, String[] args) {
-
+        
         if (args.length == 1) {
 
             Player player = (Player) sender;
@@ -356,6 +356,6 @@ public class FlightCommands {
             return true;
         } else {
             return false;
-        }
+        } 
     }
 }

@@ -12,7 +12,7 @@ public class Flight extends JavaPlugin {
 
     private FlightCommands cHandler = new FlightCommands(this);
     public boolean godMode;
-    public List allowedWorlds;
+    //public List allowedWorlds;
 
     @Override
     public void onDisable() {
@@ -25,7 +25,7 @@ public class Flight extends JavaPlugin {
         try {
             this.getConfig().options().copyDefaults(true);
             godMode = this.getConfig().getBoolean("god-mode");
-            allowedWorlds = this.getConfig().getList("allowed-worlds");
+            //allowedWorlds = this.getConfig().getList("allowed-worlds");
             this.saveConfig();
         } catch (Exception ex) {
             this.getLogger().severe("Could not load config!");
