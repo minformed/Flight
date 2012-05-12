@@ -1,6 +1,7 @@
 package me.ryanclancy000.flight;
 
 import java.io.IOException;
+import java.util.List;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Flight extends JavaPlugin {
 
     private FlightCommands cHandler = new FlightCommands(this);
+    public boolean godMode;
+    public List allowedWorlds;
 
     @Override
     public void onDisable() {
@@ -19,6 +22,15 @@ public class Flight extends JavaPlugin {
     public void onEnable() {
         getCommand("flight").setExecutor(this);
 
+        try {
+            this.getConfig().options().copyDefaults(true);
+            godMode = this.getConfig().getBoolean("god-mode");
+            allowedWorlds = this.getConfig().getList("allowed-worlds");
+            this.saveConfig();
+        } catch (Exception ex) {
+            this.getLogger().severe("Could not load config!");
+        }
+        
         try {
             Metrics metrics = new Metrics(this);
             metrics.start();
