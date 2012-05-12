@@ -4,15 +4,27 @@ import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 public class Util {
+    
+    public Flight plugin;
+
+    public Util(Flight instance) {
+        this.plugin = instance;
+    }
 
     public void enableFly(Player player) {
         player.setAllowFlight(true);
         player.setFlying(true);
+        if (!plugin.enablePlayers.contains(player.getName())) {
+            plugin.enablePlayers.add(player.getName());
+        }
     }
 
     public void disableFly(Player player) {
         player.setAllowFlight(false);
         player.setFlying(false);
+        if (plugin.enablePlayers.contains(player.getName())) {
+            plugin.enablePlayers.remove(player.getName());
+        }
     }
 
     public boolean flyModeEnabled(Player player) {

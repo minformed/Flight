@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Flight extends JavaPlugin {
 
     private FlightCommands cHandler = new FlightCommands(this);
+    public FlightListener listener;
+    
     public boolean godMode;
     //public List allowedWorlds;
     public List enablePlayers;
@@ -21,7 +23,9 @@ public class Flight extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        
         getCommand("flight").setExecutor(this);
+        getServer().getPluginManager().registerEvents(listener, this);
 
         try {
             this.getConfig().options().copyDefaults(true);
