@@ -11,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Flight extends JavaPlugin {
 
     private FlightCommands cHandler = new FlightCommands(this);
-    public FlightListener listener;
+    public FlightListener listener = new FlightListener(this);
     
     public boolean godMode;
     public boolean useEnabledPlayers;
