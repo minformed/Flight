@@ -147,7 +147,6 @@ public class FlightCommands {
             Player target = Bukkit.getServer().getPlayer(args[1]);
 
             try {
-
                 if (u.isCreative(target)) {
                     sender.sendMessage(pre + red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                     return;
@@ -321,6 +320,10 @@ public class FlightCommands {
         }
 
         for (Player p : Bukkit.getOnlinePlayers()) {
+            
+            if (!u.flyModeEnabled(p)) {
+                return;
+            }
 
             if (s.length() > 0) {
                 s.append(white + ", ");
