@@ -12,7 +12,6 @@ public class Flight extends JavaPlugin {
 
     private FlightCommands cHandler = new FlightCommands(this);
     public FlightListener listener = new FlightListener(this);
-    
     public boolean godMode;
     public boolean useEnabledPlayers;
     public List enablePlayers;
@@ -23,7 +22,7 @@ public class Flight extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        
+
         getCommand("flight").setExecutor(this);
         getServer().getPluginManager().registerEvents(listener, this);
 
@@ -57,7 +56,9 @@ public class Flight extends JavaPlugin {
 
     private boolean doCommand(CommandSender sender, String[] args) {
 
-        Player player = (Player) sender;
+        if (sender instanceof Player) {
+            Player player = (Player) sender;
+        }
 
         if (args.length == 0) {
             sender.sendMessage(cHandler.pre + ChatColor.GREEN + "by ryanclancy000");
@@ -66,7 +67,6 @@ public class Flight extends JavaPlugin {
         }
 
         // Help Command
-
         if ("help".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.help")) {
@@ -80,7 +80,6 @@ public class Flight extends JavaPlugin {
         }
 
         // Toggle Command
-
         if ("toggle".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.toggle")) {
@@ -93,7 +92,6 @@ public class Flight extends JavaPlugin {
         }
 
         // On Command
-
         if ("on".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.on")) {
@@ -107,7 +105,6 @@ public class Flight extends JavaPlugin {
         }
 
         // Off Command
-
         if ("off".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.off")) {
@@ -121,7 +118,6 @@ public class Flight extends JavaPlugin {
         }
 
         // Check Command
-
         if ("check".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.check")) {
@@ -134,7 +130,6 @@ public class Flight extends JavaPlugin {
         }
 
         // List Command
-
         if ("list".equalsIgnoreCase(args[0])) {
 
             if (!sender.hasPermission("flight.list")) {
