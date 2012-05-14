@@ -14,7 +14,6 @@ public class Flight extends JavaPlugin {
     public FlightListener listener;
     
     public boolean godMode;
-    //public List allowedWorlds;
     public boolean useEnabledPlayers;
     public List enablePlayers;
 
@@ -31,7 +30,6 @@ public class Flight extends JavaPlugin {
         try {
             this.getConfig().options().copyDefaults(true);
             godMode = this.getConfig().getBoolean("god-mode");
-            //allowedWorlds = this.getConfig().getList("allowed-worlds");
             useEnabledPlayers = this.getConfig().getBoolean("use-enabled-players");
             enablePlayers = this.getConfig().getList("enabled-players");
             this.saveConfig();

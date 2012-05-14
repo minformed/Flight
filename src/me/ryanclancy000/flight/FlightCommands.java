@@ -41,6 +41,11 @@ public class FlightCommands {
 
         if (args.length == 1) {
 
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(pre + red + "Console can't fly!");
+                return;
+            }
+
             Player player = (Player) sender;
 
             if (u.isCreative(player)) {
@@ -107,13 +112,17 @@ public class FlightCommands {
         }
 
         sender.sendMessage(red + "You do not have permission to do that...");
-        return;
 
     }
 
     public void flyOn(CommandSender sender, String[] args) {
 
         if (args.length == 1) {
+
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(pre + red + "Console can't fly!");
+                return;
+            }
 
             Player player = (Player) sender;
 
@@ -171,13 +180,17 @@ public class FlightCommands {
         }
 
         sender.sendMessage(red + "You do not have permission to do that...");
-        return;
 
     }
 
     public void flyOff(CommandSender sender, String[] args) {
 
         if (args.length == 1) {
+
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(pre + red + "Console can't fly!");
+                return;
+            }
 
             Player player = (Player) sender;
 
@@ -235,11 +248,15 @@ public class FlightCommands {
         }
 
         sender.sendMessage(red + "You do not have permission to do that...");
-        return;
 
     }
 
     public void checkCommand(CommandSender sender, String[] args) {
+
+        if (!(sender instanceof Player)) {
+            sender.sendMessage(pre + red + "Console can't fly!");
+            return;
+        }
 
         Player player = (Player) sender;
 
@@ -291,7 +308,6 @@ public class FlightCommands {
         }
 
         sender.sendMessage(red + "You do not have permission to do that...");
-        return;
 
     }
 
@@ -315,8 +331,6 @@ public class FlightCommands {
             }
         }
         sender.sendMessage(pre + green + "Flight Mode Enabled: " + s);
-        return;
-
 
     }
 }
