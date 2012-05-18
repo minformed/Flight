@@ -4,13 +4,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 
 public class FlightListener implements Listener {
 
     public Flight plugin;
-    public Util u;
+    public FlightCommands cHandler;
 
     public FlightListener(Flight instance) {
         this.plugin = instance;
@@ -18,28 +18,31 @@ public class FlightListener implements Listener {
 
     @EventHandler
     public void playerDamage(EntityDamageEvent event) {
+        
+        if (!plugin.godMode) {
+            return;
+        }
 
         Entity entity = event.getEntity();
         if (event.getEntity() instanceof Player) {
-
             Player player = (Player) entity;
-
-            if (u.flyModeEnabled(player)) {
+            if (player.getAllowFlight()) {
                 event.setCancelled(true);
             }
-
         }
 
     }
     
     @EventHandler
-    public void playerLogin(PlayerJoinEvent event) {
-        
-        Player player = event.getPlayer();
-        
-        if (plugin.enablePlayers.contains(event.getPlayer().getName())) {
-            u.enableFly(player);
+    public void pvpCheck(EntityDamageByEntityEvent event) {
+        Entity attacker = event.getDamager();
+        Entity receiver = event.getEntity();
+        if ((attacker instanceof Player) && (receiver instanceof Player) && plugin.antiPVP) {
+            Player patt = (Player) attacker;
+            Player prec = (Player) receiver;
+            if (patt.getAllowFlight()) {
+                event.setCancelled(true);
+            }
         }
-        
     }
 }

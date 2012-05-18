@@ -1,6 +1,2 @@
 god-mode: true
-allowed-worlds:
-  - world
-use-enabled-players: true
-enabled-players:
-  - notch
+anti-pvp: true
