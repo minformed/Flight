@@ -8,15 +8,20 @@ import org.bukkit.entity.Player;
 
 public class FlightCommands {
 
+    public Flight plugin;
     String pre = ChatColor.YELLOW + "[Flight] ";
     ChatColor yellow = ChatColor.YELLOW;
     ChatColor green = ChatColor.GREEN;
     ChatColor white = ChatColor.WHITE;
     ChatColor red = ChatColor.RED;
-    public Flight plugin;
 
     public FlightCommands(Flight instance) {
         this.plugin = instance;
+    }
+    
+    // Version Command
+    public void version(CommandSender sender, String[] args) {
+        sender.sendMessage(pre + yellow + "version " + green + plugin.PDF.getVersion() + " by ryanclancy000");
     }
 
     // Help Command
