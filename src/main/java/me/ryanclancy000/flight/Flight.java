@@ -11,11 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
-    public FlightCommands cHandler = new FlightCommands(this);
-    public FlightListener listener = new FlightListener(this);
-    public boolean godMode;
-    public boolean antiPVP;
     public List flyers = new ArrayList();
+    public FlightCommands cHandler = new FlightCommands(this);
 
     @Override
     public void onDisable() {
@@ -26,16 +23,6 @@ public class Flight extends JavaPlugin {
     public void onEnable() {
 
         getCommand("flight").setExecutor(this);
-        getServer().getPluginManager().registerEvents(listener, this);
-
-        try {
-            this.getConfig().options().copyDefaults(true);
-            godMode = this.getConfig().getBoolean("god-mode");
-            antiPVP = this.getConfig().getBoolean("anti-pvp");
-            this.saveConfig();
-        } catch (Exception ex) {
-            this.getLogger().severe("Could not load config!");
-        }
 
         try {
             Metrics metrics = new Metrics(this);
@@ -57,7 +44,7 @@ public class Flight extends JavaPlugin {
     private boolean doCommand(CommandSender sender, String[] args) {
 
         if (sender instanceof Player) {
-            Player player = (Player) sender;
+            sender = (Player) sender;
         }
 
         if (args.length == 0) {
