@@ -25,7 +25,7 @@ public class FlightCommands {
     }
 
     // Help Command
-    public void helpCommand(CommandSender sender, String[] args) {
+    public void helpCommand(CommandSender sender, String label, String[] args) {
 
         if (args.length > 1) {
             sender.sendMessage(pre + red + "Too many arguments!");
@@ -33,11 +33,12 @@ public class FlightCommands {
         }
 
         sender.sendMessage(pre + green + "Help Menu!");
-        sender.sendMessage(yellow + "/flight " + green + "list - " + yellow + "List players who have flight enabled.");
-        sender.sendMessage(yellow + "/flight " + green + "toggle [player] - " + yellow + "Toggles flight.");
-        sender.sendMessage(yellow + "/flight " + green + "check [player] - " + yellow + "Checks flight status.");
-        sender.sendMessage(yellow + "/flight " + green + "on [player] - " + yellow + "Enable flight.");
-        sender.sendMessage(yellow + "/flight " + green + "off [player] - " + yellow + "Disabled flight.");
+        sender.sendMessage(yellow + "/" + label + " " + green + "on [player] - " + yellow + "Enable flight.");
+        sender.sendMessage(yellow + "/" + label + " " + green + "off [player] - " + yellow + "Disabled flight.");
+        sender.sendMessage(yellow + "/" + label + " " + green + "toggle [player] - " + yellow + "Toggles flight.");
+        sender.sendMessage(yellow + "/" + label + " " + green + "list - " + yellow + "List players who have flight enabled.");
+        sender.sendMessage(yellow + "/" + label + " " + green + "check [player] - " + yellow + "Checks flight status.");
+        sender.sendMessage(yellow + "/" + label + " " + green + "version - " + yellow + "Give info on this plugin.");
 
     }
 

@@ -2,6 +2,7 @@ package me.ryanclancy000.flight;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import me.ryanclancy000.flight.listeners.GodListener;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -10,13 +11,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
+    public boolean useGod;
     public PluginDescriptionFile PDF;
+    public GodListener godListener = new GodListener(this);
     public ArrayList<Player> flyers = new ArrayList<Player>();
     public FlightCommands cHandler = new FlightCommands(this);
 
     @Override
     public void onEnable() {
+        setupConfig();
         loadMetrics();
+        registerEvents();
         PDF = this.getDescription();
         getCommand("flight").setExecutor(this);
     }
@@ -53,7 +58,7 @@ public class Flight extends JavaPlugin {
                 noPerms(sender);
                 return true;
             }
-            this.cHandler.helpCommand(sender, args);
+            this.cHandler.helpCommand(sender, label, args);
             return true;
         }
 
@@ -109,6 +114,12 @@ public class Flight extends JavaPlugin {
 
         return false;
     }
+    
+    public void setupConfig() {
+        this.getConfig().options().copyDefaults(true);
+        useGod = this.getConfig().getBoolean("use-god");
+        this.saveConfig();
+    }
 
     public void loadMetrics() {
         try {
@@ -116,6 +127,12 @@ public class Flight extends JavaPlugin {
             metrics.start();
         } catch (IOException e) {
             this.getLogger().severe("Could not enable Metrics tracking!");
+        }
+    }
+    
+    public void registerEvents() {
+        if (useGod) {
+            this.getServer().getPluginManager().registerEvents(godListener, this);
         }
     }
     
