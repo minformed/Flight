@@ -10,6 +10,7 @@ permissions:
   flight.admin:
     description: Allows use of all Flight commands.
     children:
+      flight.version: true
       flight.help: true
       flight.toggle: true
       flight.toggle.other: true
@@ -20,6 +21,9 @@ permissions:
       flight.check: true
       flight.check.other: true
       flight.list: true
+  flight.version:
+    description: Allows use of the version command.
+    default: true
   flight.help:
     description: Allows use of the help command.
     default: op

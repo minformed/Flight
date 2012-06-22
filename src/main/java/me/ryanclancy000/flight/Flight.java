@@ -2,8 +2,6 @@ package me.ryanclancy000.flight;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -12,8 +10,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
-    public List flyers = new ArrayList();
     public PluginDescriptionFile PDF;
+    public ArrayList<Player> flyers = new ArrayList<Player>();
     public FlightCommands cHandler = new FlightCommands(this);
 
     @Override
@@ -22,7 +20,7 @@ public class Flight extends JavaPlugin {
         PDF = this.getDescription();
         getCommand("flight").setExecutor(this);
     }
-
+    
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
@@ -31,11 +29,11 @@ public class Flight extends JavaPlugin {
         }
 
         if (args.length == 0) {
-            if (!sender.hasPermission("flight.toggle")) {
+            if(!sender.hasPermission("flight.toggle")) {
                 noPerms(sender);
                 return true;
             }
-            this.cHandler.toggleCommand(sender, args);
+            this.cHandler.quickToggle(sender);
             return true;
         }
         
@@ -45,7 +43,7 @@ public class Flight extends JavaPlugin {
                 noPerms(sender);
                 return true;
             }
-            this.cHandler.version(sender, args);
+            this.cHandler.versionCommand(sender, args);
             return true;
         }
 
@@ -112,10 +110,6 @@ public class Flight extends JavaPlugin {
         return false;
     }
 
-    public void noPerms(CommandSender sender) {
-        sender.sendMessage(ChatColor.RED + "You do not have permission for that command...");
-    }
-    
     public void loadMetrics() {
         try {
             Metrics metrics = new Metrics(this);
@@ -123,5 +117,9 @@ public class Flight extends JavaPlugin {
         } catch (IOException e) {
             this.getLogger().severe("Could not enable Metrics tracking!");
         }
+    }
+    
+    public void noPerms(CommandSender sender) {
+        sender.sendMessage(cHandler.pre + cHandler.red + "You do not have permission for that command...");
     }
 }
