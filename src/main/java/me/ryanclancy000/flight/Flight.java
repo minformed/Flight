@@ -3,6 +3,7 @@ package me.ryanclancy000.flight;
 import java.io.IOException;
 import java.util.ArrayList;
 import me.ryanclancy000.flight.listeners.GodListener;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,10 +14,16 @@ public class Flight extends JavaPlugin {
 
     public boolean useGod;
     public PluginDescriptionFile PDF;
-    public GodListener godListener = new GodListener(this);
-    public ArrayList<Player> flyers = new ArrayList<Player>();
-    public FlightCommands cHandler = new FlightCommands(this);
-
+    public ArrayList<String> flyers = new ArrayList<String>();
+    public final GodListener godListener = new GodListener(this);
+    public final FlightCommands cHandler = new FlightCommands(this);
+    // Chat
+    public final ChatColor red = ChatColor.RED;
+    public final ChatColor green = ChatColor.GREEN;
+    public final ChatColor white = ChatColor.WHITE;
+    public final ChatColor yellow = ChatColor.YELLOW;
+    public final static String pre = "§7[§aFlight§7] ";
+    
     @Override
     public void onEnable() {
         setupConfig();
@@ -137,6 +144,6 @@ public class Flight extends JavaPlugin {
     }
     
     public void noPerms(CommandSender sender) {
-        sender.sendMessage(cHandler.pre + cHandler.red + "You do not have permission for that command...");
+        sender.sendMessage(pre + red + "You do not have permission for that command...");
     }
 }

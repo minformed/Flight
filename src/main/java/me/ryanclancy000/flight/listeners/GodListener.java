@@ -9,7 +9,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class GodListener implements Listener {
     
-    public Flight plugin;
+    private final Flight plugin;
     
     public GodListener(Flight plugin) {
         this.plugin = plugin;
