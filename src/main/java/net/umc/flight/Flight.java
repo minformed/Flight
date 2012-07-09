@@ -10,7 +10,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
-    public boolean useGod;
     public PluginDescriptionFile PDF;
     public ArrayList<String> flyers = new ArrayList<String>();
     public final FlightCommands cHandler = new FlightCommands(this);
@@ -20,14 +19,13 @@ public class Flight extends JavaPlugin {
     public final ChatColor white = ChatColor.WHITE;
     public final ChatColor yellow = ChatColor.YELLOW;
     public final static String pre = "§7[§aFlight§7] ";
-    
+
     @Override
     public void onEnable() {
-        setupConfig();
         PDF = this.getDescription();
         getCommand("flight").setExecutor(this);
     }
-    
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
@@ -36,93 +34,87 @@ public class Flight extends JavaPlugin {
         }
 
         if (args.length == 0) {
-            if(!sender.hasPermission("flight.toggle")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.toggle")) {
+                this.cHandler.quickToggle(sender);
                 return true;
             }
-            this.cHandler.quickToggle(sender);
+            noPerms(sender);
             return true;
         }
-        
+
         // Version Command
         if ("version".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.version")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.version")) {
+                this.cHandler.versionCommand(sender, args);
                 return true;
             }
-            this.cHandler.versionCommand(sender, args);
+            noPerms(sender);
             return true;
         }
 
         // Help Command
         if ("help".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.help")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.help")) {
+                this.cHandler.helpCommand(sender, label, args);
                 return true;
             }
-            this.cHandler.helpCommand(sender, label, args);
+            noPerms(sender);
             return true;
         }
 
         // Toggle Command
         if ("toggle".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.toggle")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.toggle")) {
+                this.cHandler.toggleCommand(sender, args);
                 return true;
             }
-            this.cHandler.toggleCommand(sender, args);
+            noPerms(sender);
             return true;
         }
 
         // On Command
         if ("on".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.on")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.on")) {
+                this.cHandler.flyOn(sender, args);
                 return true;
             }
-            this.cHandler.flyOn(sender, args);
+            noPerms(sender);
             return true;
         }
 
         // Off Command
         if ("off".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.off")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.off")) {
+                this.cHandler.flyOff(sender, args);
                 return true;
             }
-            this.cHandler.flyOff(sender, args);
+            noPerms(sender);
             return true;
         }
 
         // Check Command
         if ("check".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.check")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.check")) {
+                this.cHandler.checkCommand(sender, args);
                 return true;
             }
-            this.cHandler.checkCommand(sender, args);
+            noPerms(sender);
             return true;
         }
 
         // List Command
         if ("list".equalsIgnoreCase(args[0])) {
-            if (!sender.hasPermission("flight.list")) {
-                noPerms(sender);
+            if (sender.hasPermission("flight.list")) {
+                this.cHandler.listCommand(sender, args);
                 return true;
             }
-            this.cHandler.listCommand(sender, args);
+            noPerms(sender);
             return true;
         }
 
         return false;
     }
-    
-    public void setupConfig() {
-        this.getConfig().options().copyDefaults(true);
-        useGod = this.getConfig().getBoolean("use-god");
-        this.saveConfig();
-    }
-    
+
     public void noPerms(CommandSender sender) {
         sender.sendMessage(pre + red + "You do not have permission for that command...");
     }
