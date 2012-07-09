@@ -1,5 +1,5 @@
 name: Flight
-main: me.ryanclancy000.flight.Flight
+main: net.umc.flight.Flight
 version: 1.2
 commands:
   flight:
@@ -21,7 +21,6 @@ permissions:
       flight.check: true
       flight.check.other: true
       flight.list: true
-      flight.god: true
   flight.version:
     description: Allows use of the version command.
     default: true
@@ -54,7 +53,4 @@ permissions:
     default: op
   flight.list:
     description: Allows use of the list command.
-    default: op
-  flight.god:
-    description: Gives access to the god feature if enabled.
     default: op

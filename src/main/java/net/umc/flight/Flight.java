@@ -1,8 +1,6 @@
-package me.ryanclancy000.flight;
+package net.umc.flight;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import me.ryanclancy000.flight.listeners.GodListener;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,7 +13,6 @@ public class Flight extends JavaPlugin {
     public boolean useGod;
     public PluginDescriptionFile PDF;
     public ArrayList<String> flyers = new ArrayList<String>();
-    public final GodListener godListener = new GodListener(this);
     public final FlightCommands cHandler = new FlightCommands(this);
     // Chat
     public final ChatColor red = ChatColor.RED;
@@ -27,8 +24,6 @@ public class Flight extends JavaPlugin {
     @Override
     public void onEnable() {
         setupConfig();
-        loadMetrics();
-        registerEvents();
         PDF = this.getDescription();
         getCommand("flight").setExecutor(this);
     }
@@ -126,21 +121,6 @@ public class Flight extends JavaPlugin {
         this.getConfig().options().copyDefaults(true);
         useGod = this.getConfig().getBoolean("use-god");
         this.saveConfig();
-    }
-
-    public void loadMetrics() {
-        try {
-            Metrics metrics = new Metrics(this);
-            metrics.start();
-        } catch (IOException e) {
-            this.getLogger().severe("Could not enable Metrics tracking!");
-        }
-    }
-    
-    public void registerEvents() {
-        if (useGod) {
-            this.getServer().getPluginManager().registerEvents(godListener, this);
-        }
     }
     
     public void noPerms(CommandSender sender) {
