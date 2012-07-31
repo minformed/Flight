@@ -1,5 +1,8 @@
 package net.umc.flight;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
@@ -279,24 +282,30 @@ public class FlightCommands {
     }
 
     public void listCommand(CommandSender sender, String[] args) {
-
+        
         if (args.length != 1) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
             return;
         }
-        
+
         StringBuilder sb = new StringBuilder();
+        List<String> list = new ArrayList<String>();
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            if (flyModeEnabled(p)) {
-                String s = p.getName();
-                if (s.length() > 0) {
-                    sb.append(Flight.white + ", ");
-                }
-                sb.append(Flight.green + s);
+            String pName = "";
+            if (flyModeEnabled(p) && !isCreative(p)) {
+                pName = p.getName();
+                list.add(pName);
             }
         }
-        sender.sendMessage(Flight.pre + Flight.green + "Flight Mode Enabled: " + sb);
+        Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
+        for (String pName : list) {
+            if (sb.length() > 0) {
+                sb.append(Flight.white + ", ");
+            }
+            sb.append(pName);
+        }
+        sender.sendMessage(Flight.pre + Flight.gray + "Flight Mode Enabled: " + list);
     }
 
     public void enableFly(CommandSender sender, Player player) {
