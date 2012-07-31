@@ -1,28 +1,24 @@
 package net.umc.flight;
 
-import java.util.ArrayList;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
-    public PluginDescriptionFile PDF;
-    public ArrayList<String> flyers = new ArrayList<String>();
     public final FlightCommands cHandler = new FlightCommands(this);
-    // Chat
-    public final ChatColor red = ChatColor.RED;
-    public final ChatColor green = ChatColor.GREEN;
-    public final ChatColor white = ChatColor.WHITE;
-    public final ChatColor yellow = ChatColor.YELLOW;
-    public final static String pre = "§7[§aFlight§7] ";
+    //
+    public static final ChatColor red = ChatColor.RED;
+    public static final ChatColor gray = ChatColor.GRAY;
+    public static final ChatColor green = ChatColor.GREEN;
+    public static final ChatColor white = ChatColor.WHITE;
+    public static final ChatColor yellow = ChatColor.YELLOW;
+    public static final String pre = gray + "[" + green + "Flight" + gray + "] ";
 
     @Override
     public void onEnable() {
-        PDF = this.getDescription();
         getCommand("flight").setExecutor(this);
     }
 
@@ -115,7 +111,7 @@ public class Flight extends JavaPlugin {
         return false;
     }
 
-    public void noPerms(CommandSender sender) {
+    private void noPerms(CommandSender sender) {
         sender.sendMessage(pre + red + "You do not have permission for that command...");
     }
 }
