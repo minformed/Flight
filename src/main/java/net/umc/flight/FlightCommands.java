@@ -20,7 +20,7 @@ public class FlightCommands {
     // Version Command
     public void versionCommand(CommandSender sender, String[] args) {
         PluginDescriptionFile PDF = plugin.getDescription();
-        sender.sendMessage(Flight.pre + Flight.green + "version " + PDF.getVersion() + " by ryanclancy000");
+        sender.sendMessage(Flight.pre + Flight.green + "v" + PDF.getVersion() + Flight.gray + " by " + Flight.green + "ryanclancy000");
     }
 
     // Help Command
