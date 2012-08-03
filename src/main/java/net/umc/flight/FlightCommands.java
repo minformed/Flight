@@ -97,7 +97,7 @@ public class FlightCommands {
 
         if (args.length == 2 && sender.hasPermission("flight.toggle.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -153,7 +153,7 @@ public class FlightCommands {
 
         if (args.length == 2 && sender.hasPermission("flight.on.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -208,7 +208,7 @@ public class FlightCommands {
 
         if (args.length == 2 && sender.hasPermission("flight.off.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -264,7 +264,7 @@ public class FlightCommands {
 
         if (args.length == 2 && sender.hasPermission("flight.check.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -322,7 +322,9 @@ public class FlightCommands {
 
     public void enableFly(CommandSender sender, Player player) {
         player.setAllowFlight(true);
-        player.setFlying(true);
+        if (!plugin.getFlyers().contains(player.getName())) {
+            plugin.getFlyers().add(player.getName());
+        }
         if (sender.getName().equalsIgnoreCase(player.getName())) {
             player.sendMessage(Flight.pre + Flight.green + "Flight enabled!");
         } else {
@@ -334,6 +336,9 @@ public class FlightCommands {
     public void disableFly(CommandSender sender, Player player) {
         player.setAllowFlight(false);
         player.setFlying(false);
+        if (plugin.getFlyers().contains(player.getName())) {
+            plugin.getFlyers().remove(player.getName());
+        }
         if (sender.getName().equalsIgnoreCase(player.getName())) {
             player.sendMessage(Flight.pre + Flight.red + "Flight disabled!");
         } else {
