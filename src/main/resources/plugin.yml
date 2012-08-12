@@ -26,7 +26,7 @@ permissions:
     default: true
   flight.help:
     description: Allows use of the help command.
-    default: op
+    default: true
   flight.toggle:
     description: Allows use of the toggle command.
     default: op

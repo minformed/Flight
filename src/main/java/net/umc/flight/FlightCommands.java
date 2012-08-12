@@ -32,12 +32,24 @@ public class FlightCommands {
         }
 
         sender.sendMessage(Flight.white + "--------------------- " + Flight.gray + "[" + Flight.green + " Flight " + Flight.gray + "]" + Flight.white + " ---------------------");
-        if (sender.hasPermission("flight.on")) sender.sendMessage(Flight.green + "/flight on [player]" + Flight.white + " - " + Flight.gray + "Enable flight.");
-        if (sender.hasPermission("flight.off")) sender.sendMessage(Flight.green + "/flight off [player]" + Flight.white + " - " + Flight.gray + "Disable flight.");
-        if (sender.hasPermission("flight.toggle")) sender.sendMessage(Flight.green + "/flight toggle [player]" + Flight.white + " - " + Flight.gray + "Toggle flight.");
-        if (sender.hasPermission("flight.list")) sender.sendMessage(Flight.green + "/flight list" + Flight.white + " - " + Flight.gray + "List flying players flight.");
-        if (sender.hasPermission("flight.check")) sender.sendMessage(Flight.green + "/flight check [player]" + Flight.white + " - " + Flight.gray + "Check flight status.");
-        if (sender.hasPermission("flight.version")) sender.sendMessage(Flight.green + "/flight version" + Flight.white + " - " + Flight.gray + "Give plugin info.");
+        if (sender.hasPermission("flight.on")) {
+            sender.sendMessage(Flight.green + "/flight on [player]" + Flight.white + " - " + Flight.gray + "Enable flight.");
+        }
+        if (sender.hasPermission("flight.off")) {
+            sender.sendMessage(Flight.green + "/flight off [player]" + Flight.white + " - " + Flight.gray + "Disable flight.");
+        }
+        if (sender.hasPermission("flight.toggle")) {
+            sender.sendMessage(Flight.green + "/flight toggle [player]" + Flight.white + " - " + Flight.gray + "Toggle flight.");
+        }
+        if (sender.hasPermission("flight.list")) {
+            sender.sendMessage(Flight.green + "/flight list" + Flight.white + " - " + Flight.gray + "List flying players flight.");
+        }
+        if (sender.hasPermission("flight.check")) {
+            sender.sendMessage(Flight.green + "/flight check [player]" + Flight.white + " - " + Flight.gray + "Check flight status.");
+        }
+        if (sender.hasPermission("flight.version")) {
+            sender.sendMessage(Flight.green + "/flight version" + Flight.white + " - " + Flight.gray + "Give plugin info.");
+        }
     }
 
     // Quick Toggle Command
@@ -76,16 +88,14 @@ public class FlightCommands {
 
             if (flyModeEnabled(player)) {
                 disableFly(sender, player);
-                return;
             } else {
                 enableFly(sender, player);
-                return;
             }
         }
 
         if (args.length == 2 && sender.hasPermission("flight.toggle.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -99,10 +109,8 @@ public class FlightCommands {
 
             if (target.getAllowFlight()) {
                 disableFly(sender, target);
-                return;
             } else {
                 enableFly(sender, target);
-                return;
             }
         }
 
@@ -136,12 +144,11 @@ public class FlightCommands {
             }
 
             enableFly(sender, player);
-            return;
         }
 
         if (args.length == 2 && sender.hasPermission("flight.on.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -158,7 +165,6 @@ public class FlightCommands {
                 return;
             }
             enableFly(sender, target);
-            return;
         }
 
         if (args.length > 2) {
@@ -191,12 +197,11 @@ public class FlightCommands {
             }
 
             disableFly(sender, player);
-            return;
         }
 
         if (args.length == 2 && sender.hasPermission("flight.off.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -214,7 +219,6 @@ public class FlightCommands {
             }
 
             disableFly(sender, target);
-            return;
         }
 
         if (args.length > 2) {
@@ -243,16 +247,14 @@ public class FlightCommands {
 
             if (flyModeEnabled(player)) {
                 sender.sendMessage(Flight.pre + Flight.green + "Your flight is enabled!");
-                return;
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + "Your flight is disabled!");
-                return;
             }
         }
 
         if (args.length == 2 && sender.hasPermission("flight.check.other")) {
 
-            Player target = Bukkit.getServer().getPlayer(args[1]);
+            Player target = plugin.getServer().getPlayer(args[1]);
 
             if (target == null) {
                 sender.sendMessage(Flight.pre + Flight.red + "Player not online!");
@@ -266,10 +268,8 @@ public class FlightCommands {
 
             if (flyModeEnabled(target)) {
                 sender.sendMessage(Flight.pre + Flight.green + target.getName() + " has flight enabled!");
-                return;
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + target.getName() + " has flight disabled!");
-                return;
             }
         }
 
@@ -282,7 +282,7 @@ public class FlightCommands {
     }
 
     public void listCommand(CommandSender sender, String[] args) {
-        
+
         if (args.length != 1) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
             return;
@@ -310,7 +310,9 @@ public class FlightCommands {
 
     public void enableFly(CommandSender sender, Player player) {
         player.setAllowFlight(true);
-        player.setFlying(true);
+        if (!plugin.getFlyers().contains(player.getName())) {
+            plugin.getFlyers().add(player.getName());
+        }
         if (sender.getName().equalsIgnoreCase(player.getName())) {
             player.sendMessage(Flight.pre + Flight.green + "Flight enabled!");
         } else {
@@ -322,6 +324,9 @@ public class FlightCommands {
     public void disableFly(CommandSender sender, Player player) {
         player.setAllowFlight(false);
         player.setFlying(false);
+        if (plugin.getFlyers().contains(player.getName())) {
+            plugin.getFlyers().remove(player.getName());
+        }
         if (sender.getName().equalsIgnoreCase(player.getName())) {
             player.sendMessage(Flight.pre + Flight.red + "Flight disabled!");
         } else {
