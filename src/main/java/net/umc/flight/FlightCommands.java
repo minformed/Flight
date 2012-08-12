@@ -88,10 +88,8 @@ public class FlightCommands {
 
             if (flyModeEnabled(player)) {
                 disableFly(sender, player);
-                return;
             } else {
                 enableFly(sender, player);
-                return;
             }
         }
 
@@ -111,10 +109,8 @@ public class FlightCommands {
 
             if (target.getAllowFlight()) {
                 disableFly(sender, target);
-                return;
             } else {
                 enableFly(sender, target);
-                return;
             }
         }
 
@@ -148,7 +144,6 @@ public class FlightCommands {
             }
 
             enableFly(sender, player);
-            return;
         }
 
         if (args.length == 2 && sender.hasPermission("flight.on.other")) {
@@ -170,7 +165,6 @@ public class FlightCommands {
                 return;
             }
             enableFly(sender, target);
-            return;
         }
 
         if (args.length > 2) {
@@ -203,7 +197,6 @@ public class FlightCommands {
             }
 
             disableFly(sender, player);
-            return;
         }
 
         if (args.length == 2 && sender.hasPermission("flight.off.other")) {
@@ -226,7 +219,6 @@ public class FlightCommands {
             }
 
             disableFly(sender, target);
-            return;
         }
 
         if (args.length > 2) {
@@ -255,10 +247,8 @@ public class FlightCommands {
 
             if (flyModeEnabled(player)) {
                 sender.sendMessage(Flight.pre + Flight.green + "Your flight is enabled!");
-                return;
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + "Your flight is disabled!");
-                return;
             }
         }
 
@@ -278,10 +268,8 @@ public class FlightCommands {
 
             if (flyModeEnabled(target)) {
                 sender.sendMessage(Flight.pre + Flight.green + target.getName() + " has flight enabled!");
-                return;
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + target.getName() + " has flight disabled!");
-                return;
             }
         }
 
