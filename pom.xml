@@ -4,7 +4,7 @@
 
   <groupId>me.ryanclancy000</groupId>
   <artifactId>Flight</artifactId>
-  <version>1.3-SNAPSHOT</version>
+  <version>1.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>Flight</name>
@@ -18,7 +18,7 @@
     <dependency>
       <groupId>org.bukkit</groupId>
       <artifactId>bukkit</artifactId>
-      <version>1.2.5-R4.0</version>
+      <version>1.3.1-R1.0</version>
     </dependency>
   </dependencies>
   
