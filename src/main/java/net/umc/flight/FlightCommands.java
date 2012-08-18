@@ -7,19 +7,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.PluginDescriptionFile;
 
 public class FlightCommands {
 
     private final Flight plugin;
 
-    public FlightCommands(Flight instance) {
-        this.plugin = instance;
+    public FlightCommands(Flight plugin) {
+        this.plugin = plugin;
     }
 
     public void versionCommand(CommandSender sender, String[] args) {
-        PluginDescriptionFile PDF = plugin.getDescription();
-        sender.sendMessage(Flight.pre + Flight.green + "v" + PDF.getVersion() + Flight.gray + " by " + Flight.green + "ryanclancy000");
+        sender.sendMessage(Flight.pre + Flight.green + "v" + plugin.getDescription().getVersion() + Flight.gray + " by " + Flight.green + "ryanclancy000");
     }
 
     public void helpCommand(CommandSender sender, String label, String[] args) {
@@ -118,7 +116,7 @@ public class FlightCommands {
         sender.sendMessage(Flight.red + "You do not have permission to do that...");
     }
 
-    public void flyOn(CommandSender sender, String[] args) {
+    public void flightOnCommand(CommandSender sender, String[] args) {
 
         if (args.length == 1) {
 
@@ -171,7 +169,7 @@ public class FlightCommands {
         sender.sendMessage(Flight.red + "You do not have permission to do that...");
     }
 
-    public void flyOff(CommandSender sender, String[] args) {
+    public void flightOffCommand(CommandSender sender, String[] args) {
 
         if (args.length == 1) {
 
