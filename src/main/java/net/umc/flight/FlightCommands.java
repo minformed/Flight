@@ -17,13 +17,11 @@ public class FlightCommands {
         this.plugin = instance;
     }
 
-    // Version Command
     public void versionCommand(CommandSender sender, String[] args) {
         PluginDescriptionFile PDF = plugin.getDescription();
         sender.sendMessage(Flight.pre + Flight.green + "v" + PDF.getVersion() + Flight.gray + " by " + Flight.green + "ryanclancy000");
     }
 
-    // Help Command
     public void helpCommand(CommandSender sender, String label, String[] args) {
 
         if (args.length > 1) {
@@ -52,7 +50,6 @@ public class FlightCommands {
         }
     }
 
-    // Quick Toggle Command
     public void quickToggle(CommandSender sender) {
 
         Player player = (Player) sender;
@@ -69,7 +66,6 @@ public class FlightCommands {
         }
     }
 
-    // Toggle Command
     public void toggleCommand(CommandSender sender, String[] args) {
 
         if (args.length == 1) {

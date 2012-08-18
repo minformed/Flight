@@ -93,15 +93,8 @@ public class Flight extends JavaPlugin {
         sender.sendMessage(pre + red + "You do not have permission for that command...");
     }
 
+    /* Get list of players with flight enable */
     public List<String> getFlyers() {
         return flyingPlayers;
-    }
-
-    public FlightCommands getCommands() {
-        return cHandler;
-    }
-
-    public FlightListener getListener() {
-        return listener;
     }
 }
