@@ -3,9 +3,9 @@ package net.umc.flight;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class FlightListener implements Listener {
 
@@ -24,8 +24,8 @@ public class FlightListener implements Listener {
     }
 
     @EventHandler
-    public void onRespawn(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
+    public void onDeath(PlayerDeathEvent event) {
+        Player player = event.getEntity();
         if (plugin.getFlyers().contains(player.getName())) {
             player.setAllowFlight(true);
         }
@@ -33,9 +33,9 @@ public class FlightListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        if (plugin.getFlyers().contains(player.getName())) {
-            plugin.getFlyers().remove(player.getName());
+        String name = event.getPlayer().getName();
+        if (plugin.getFlyers().contains(name)) {
+            plugin.getFlyers().remove(name);
         }
     }
 }
