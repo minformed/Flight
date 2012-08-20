@@ -89,7 +89,7 @@ public class Flight extends JavaPlugin {
         return true;
     }
     
-    private void noPerms(CommandSender sender) {
+    public void noPerms(CommandSender sender) {
         sender.sendMessage(pre + red + "You do not have permission for that command...");
     }
 

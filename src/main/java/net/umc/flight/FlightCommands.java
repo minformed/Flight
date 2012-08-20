@@ -85,9 +85,7 @@ public class FlightCommands {
             } else {
                 enableFly(sender, player);
             }
-        }
-
-        if (args.length == 2 && sender.hasPermission("flight.toggle.other")) {
+        } else if (args.length == 2 && sender.hasPermission("flight.toggle.other")) {
 
             Player target = plugin.getServer().getPlayer(args[1]);
 
@@ -106,14 +104,11 @@ public class FlightCommands {
             } else {
                 enableFly(sender, target);
             }
-        }
-
-        if (args.length > 2) {
+        } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
-            return;
+        } else {
+            plugin.noPerms(sender);
         }
-
-        sender.sendMessage(Flight.red + "You do not have permission to do that...");
     }
 
     public void flightOnCommand(CommandSender sender, String[] args) {
@@ -136,11 +131,8 @@ public class FlightCommands {
                 player.sendMessage(Flight.pre + Flight.red + "Flight already on!");
                 return;
             }
-
             enableFly(sender, player);
-        }
-
-        if (args.length == 2 && sender.hasPermission("flight.on.other")) {
+        } else if (args.length == 2 && sender.hasPermission("flight.on.other")) {
 
             Player target = plugin.getServer().getPlayer(args[1]);
 
@@ -159,14 +151,11 @@ public class FlightCommands {
                 return;
             }
             enableFly(sender, target);
-        }
-
-        if (args.length > 2) {
+        } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
-            return;
+        } else {
+            plugin.noPerms(sender);
         }
-
-        sender.sendMessage(Flight.red + "You do not have permission to do that...");
     }
 
     public void flightOffCommand(CommandSender sender, String[] args) {
@@ -191,9 +180,7 @@ public class FlightCommands {
             }
 
             disableFly(sender, player);
-        }
-
-        if (args.length == 2 && sender.hasPermission("flight.off.other")) {
+        } else if (args.length == 2 && sender.hasPermission("flight.off.other")) {
 
             Player target = plugin.getServer().getPlayer(args[1]);
 
@@ -213,14 +200,11 @@ public class FlightCommands {
             }
 
             disableFly(sender, target);
-        }
-
-        if (args.length > 2) {
+        } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
-            return;
+        } else {
+            plugin.noPerms(sender);
         }
-
-        sender.sendMessage(Flight.red + "You do not have permission to do that...");
     }
 
     public void checkCommand(CommandSender sender, String[] args) {
@@ -244,9 +228,7 @@ public class FlightCommands {
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + "Your flight is disabled!");
             }
-        }
-
-        if (args.length == 2 && sender.hasPermission("flight.check.other")) {
+        } else if (args.length == 2 && sender.hasPermission("flight.check.other")) {
 
             Player target = plugin.getServer().getPlayer(args[1]);
 
@@ -265,14 +247,11 @@ public class FlightCommands {
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + target.getName() + " has flight disabled!");
             }
-        }
-
-        if (args.length > 2) {
+        } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
-            return;
+        } else {
+            plugin.noPerms(sender);
         }
-
-        sender.sendMessage(Flight.red + "You do not have permission to do that...");
     }
 
     public void listCommand(CommandSender sender, String[] args) {
