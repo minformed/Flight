@@ -26,22 +26,22 @@ public class FlightCommands {
         } else {
             sender.sendMessage(Flight.white + "--------------------- " + Flight.gray + "[" + Flight.green + " Flight " + Flight.gray + "]" + Flight.white + " ---------------------");
             if (sender.hasPermission("flight.on")) {
-                sender.sendMessage(Flight.green + "/flight on [player]" + Flight.white + " - " + Flight.gray + "Enable flight.");
+                sender.sendMessage(Flight.green + "/" + label + " on [player]" + Flight.white + " - " + Flight.gray + "Enable flight.");
             }
             if (sender.hasPermission("flight.off")) {
-                sender.sendMessage(Flight.green + "/flight off [player]" + Flight.white + " - " + Flight.gray + "Disable flight.");
+                sender.sendMessage(Flight.green + "/" + label + " off [player]" + Flight.white + " - " + Flight.gray + "Disable flight.");
             }
             if (sender.hasPermission("flight.toggle")) {
-                sender.sendMessage(Flight.green + "/flight toggle [player]" + Flight.white + " - " + Flight.gray + "Toggle flight.");
+                sender.sendMessage(Flight.green + "/" + label + " toggle [player]" + Flight.white + " - " + Flight.gray + "Toggle flight.");
             }
             if (sender.hasPermission("flight.list")) {
-                sender.sendMessage(Flight.green + "/flight list" + Flight.white + " - " + Flight.gray + "List flying players flight.");
+                sender.sendMessage(Flight.green + "/" + label + " list" + Flight.white + " - " + Flight.gray + "List flying players flight.");
             }
             if (sender.hasPermission("flight.check")) {
-                sender.sendMessage(Flight.green + "/flight check [player]" + Flight.white + " - " + Flight.gray + "Check flight status.");
+                sender.sendMessage(Flight.green + "/" + label + " check [player]" + Flight.white + " - " + Flight.gray + "Check flight status.");
             }
             if (sender.hasPermission("flight.version")) {
-                sender.sendMessage(Flight.green + "/flight version" + Flight.white + " - " + Flight.gray + "Give plugin info.");
+                sender.sendMessage(Flight.green + "/" + label + " version" + Flight.white + " - " + Flight.gray + "Give plugin info.");
             }
         }
     }
