@@ -7,6 +7,12 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 
 public class FlightListener implements Listener {
+    
+    private final Flight plugin;
+    
+    public FlightListener(Flight plugin) {
+        this.plugin = plugin;
+    }
 
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
