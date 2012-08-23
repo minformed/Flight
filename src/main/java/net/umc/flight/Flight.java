@@ -22,7 +22,7 @@ public class Flight extends JavaPlugin {
     @Override
     public void onEnable() {
         this.getCommand("flight").setExecutor(this);
-        this.getServer().getPluginManager().registerEvents(new FlightListener(), this);
+        this.getServer().getPluginManager().registerEvents(new FlightListener(this), this);
     }
 
     @Override

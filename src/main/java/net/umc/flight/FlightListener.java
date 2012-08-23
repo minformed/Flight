@@ -17,7 +17,7 @@ public class FlightListener implements Listener {
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
-        if (player.getAllowFlight()) {
+        if (player.getAllowFlight() && !plugin.getUtils().isCreative(player)) {
             player.setAllowFlight(true);
         }
     }
@@ -25,7 +25,7 @@ public class FlightListener implements Listener {
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if (player.getAllowFlight()) {
+        if (player.getAllowFlight() && !plugin.getUtils().isCreative(player)) {
             player.setAllowFlight(true);
         }
     }
