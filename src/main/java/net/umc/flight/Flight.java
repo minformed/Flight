@@ -1,7 +1,6 @@
 package net.umc.flight;
 
-import java.util.ArrayList;
-import java.util.List;
+import net.umc.flight.utils.Utilities;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,9 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
-    private List<String> flyingPlayers = new ArrayList<String>();
+    private final Utilities utils = new Utilities();
     private final FlightCommands cHandler = new FlightCommands(this);
-    private final FlightListener listener = new FlightListener(this);
     //
     public static final ChatColor red = ChatColor.RED;
     public static final ChatColor gray = ChatColor.GRAY;
@@ -23,8 +21,8 @@ public class Flight extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getCommand("flight").setExecutor(this);
-        getServer().getPluginManager().registerEvents(listener, this);
+        this.getCommand("flight").setExecutor(this);
+        this.getServer().getPluginManager().registerEvents(new FlightListener(), this);
     }
 
     @Override
@@ -92,8 +90,8 @@ public class Flight extends JavaPlugin {
     public void noPerms(CommandSender sender) {
         sender.sendMessage(pre + red + "You do not have permission for that command...");
     }
-
-    public List<String> getFlyers() {
-        return flyingPlayers;
+    
+    public Utilities getUtils() {
+        return utils;
     }
 }

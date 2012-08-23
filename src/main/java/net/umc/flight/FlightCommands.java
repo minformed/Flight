@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -52,15 +51,15 @@ public class FlightCommands {
 
         Player player = (Player) sender;
 
-        if (isCreative(player)) {
+        if (plugin.getUtils().isCreative(player)) {
             player.sendMessage(Flight.pre + Flight.red + "Cannot change flight while in creative!");
             return;
         }
 
-        if (flyModeEnabled(player)) {
-            disableFly(sender, player);
+        if (plugin.getUtils().isFlightEnabled(player)) {
+            plugin.getUtils().disableFlight(sender, player);
         } else {
-            enableFly(sender, player);
+            plugin.getUtils().enableFlight(sender, player);
         }
     }
 
@@ -75,15 +74,15 @@ public class FlightCommands {
 
             Player player = (Player) sender;
 
-            if (isCreative(player)) {
+            if (plugin.getUtils().isCreative(player)) {
                 player.sendMessage(Flight.pre + Flight.red + "Cannot change flight while in creative!");
                 return;
             }
 
-            if (flyModeEnabled(player)) {
-                disableFly(sender, player);
+            if (plugin.getUtils().isFlightEnabled(player)) {
+                plugin.getUtils().disableFlight(sender, player);
             } else {
-                enableFly(sender, player);
+                plugin.getUtils().enableFlight(sender, player);
             }
         } else if (args.length == 2 && sender.hasPermission("flight.toggle.other")) {
 
@@ -94,15 +93,15 @@ public class FlightCommands {
                 return;
             }
 
-            if (isCreative(target)) {
+            if (plugin.getUtils().isCreative(target)) {
                 sender.sendMessage(Flight.pre + Flight.red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                 return;
             }
 
             if (target.getAllowFlight()) {
-                disableFly(sender, target);
+                plugin.getUtils().disableFlight(sender, target);
             } else {
-                enableFly(sender, target);
+                plugin.getUtils().enableFlight(sender, target);
             }
         } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
@@ -122,16 +121,16 @@ public class FlightCommands {
 
             Player player = (Player) sender;
 
-            if (isCreative(player)) {
+            if (plugin.getUtils().isCreative(player)) {
                 player.sendMessage(Flight.pre + Flight.red + "Cannot change flight while in creative!");
                 return;
             }
 
-            if (flyModeEnabled(player)) {
+            if (plugin.getUtils().isFlightEnabled(player)) {
                 player.sendMessage(Flight.pre + Flight.red + "Flight already on!");
                 return;
             }
-            enableFly(sender, player);
+            plugin.getUtils().enableFlight(sender, player);
         } else if (args.length == 2 && sender.hasPermission("flight.on.other")) {
 
             Player target = plugin.getServer().getPlayer(args[1]);
@@ -141,16 +140,16 @@ public class FlightCommands {
                 return;
             }
 
-            if (isCreative(target)) {
+            if (plugin.getUtils().isCreative(target)) {
                 sender.sendMessage(Flight.pre + Flight.red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                 return;
             }
 
-            if (flyModeEnabled(target)) {
+            if (plugin.getUtils().isFlightEnabled(target)) {
                 sender.sendMessage(Flight.pre + Flight.red + "Flight already on for " + target.getName());
                 return;
             }
-            enableFly(sender, target);
+            plugin.getUtils().enableFlight(sender, target);
         } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
         } else {
@@ -169,17 +168,17 @@ public class FlightCommands {
 
             Player player = (Player) sender;
 
-            if (isCreative(player)) {
+            if (plugin.getUtils().isCreative(player)) {
                 player.sendMessage(Flight.pre + Flight.red + "Cannot change flight while in creative!");
                 return;
             }
 
-            if (!flyModeEnabled(player)) {
+            if (!plugin.getUtils().isFlightEnabled(player)) {
                 player.sendMessage(Flight.pre + Flight.red + "Flight already off!");
                 return;
             }
 
-            disableFly(sender, player);
+            plugin.getUtils().disableFlight(sender, player);
         } else if (args.length == 2 && sender.hasPermission("flight.off.other")) {
 
             Player target = plugin.getServer().getPlayer(args[1]);
@@ -189,17 +188,17 @@ public class FlightCommands {
                 return;
             }
 
-            if (isCreative(target)) {
+            if (plugin.getUtils().isCreative(target)) {
                 sender.sendMessage(Flight.pre + Flight.red + "Can't edit flight for " + target.getName() + ", they are in creative mode!");
                 return;
             }
 
-            if (!flyModeEnabled(target)) {
+            if (!plugin.getUtils().isFlightEnabled(target)) {
                 sender.sendMessage(Flight.pre + Flight.red + "Flight already off for " + target.getName());
                 return;
             }
 
-            disableFly(sender, target);
+            plugin.getUtils().disableFlight(sender, target);
         } else if (args.length > 2) {
             sender.sendMessage(Flight.pre + Flight.red + "Too many arguments!");
         } else {
@@ -218,12 +217,12 @@ public class FlightCommands {
 
         if (args.length == 1) {
 
-            if (isCreative(player)) {
+            if (plugin.getUtils().isCreative(player)) {
                 sender.sendMessage(Flight.pre + Flight.red + "You are in creative, of course mode is enabled!");
                 return;
             }
 
-            if (flyModeEnabled(player)) {
+            if (plugin.getUtils().isFlightEnabled(player)) {
                 sender.sendMessage(Flight.pre + Flight.green + "Your flight is enabled!");
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + "Your flight is disabled!");
@@ -237,12 +236,12 @@ public class FlightCommands {
                 return;
             }
 
-            if (isCreative(target)) {
+            if (plugin.getUtils().isCreative(target)) {
                 sender.sendMessage(Flight.pre + Flight.red + target.getName() + " is in creative, of course flight is enabled!");
                 return;
             }
 
-            if (flyModeEnabled(target)) {
+            if (plugin.getUtils().isFlightEnabled(target)) {
                 sender.sendMessage(Flight.pre + Flight.green + target.getName() + " has flight enabled!");
             } else {
                 sender.sendMessage(Flight.pre + Flight.red + target.getName() + " has flight disabled!");
@@ -266,7 +265,7 @@ public class FlightCommands {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             String pName = "";
-            if (flyModeEnabled(p) && !isCreative(p)) {
+            if (plugin.getUtils().isFlightEnabled(p) && !plugin.getUtils().isCreative(p)) {
                 pName = p.getName();
                 list.add(pName);
             }
@@ -279,56 +278,5 @@ public class FlightCommands {
             sb.append(pName);
         }
         sender.sendMessage(Flight.pre + Flight.gray + "Flight Mode Enabled: " + list);
-    }
-
-    public void enableFly(CommandSender sender, Player player) {
-        player.setAllowFlight(true);
-        if (!plugin.getFlyers().contains(player.getName())) {
-            plugin.getFlyers().add(player.getName());
-        }
-        if (sender.getName().equalsIgnoreCase(player.getName())) {
-            player.sendMessage(Flight.pre + Flight.green + "Flight enabled!");
-        } else {
-            player.sendMessage(Flight.pre + Flight.green + "Flight enabled by " + sender.getName());
-            sender.sendMessage(Flight.pre + Flight.green + "Flight enabled for " + player.getName());
-        }
-    }
-
-    public void disableFly(CommandSender sender, Player player) {
-        player.setAllowFlight(false);
-        player.setFlying(false);
-        if (plugin.getFlyers().contains(player.getName())) {
-            plugin.getFlyers().remove(player.getName());
-        }
-        if (sender.getName().equalsIgnoreCase(player.getName())) {
-            player.sendMessage(Flight.pre + Flight.red + "Flight disabled!");
-        } else {
-            player.sendMessage(Flight.pre + Flight.red + "Flight disabled by " + sender.getName());
-            sender.sendMessage(Flight.pre + Flight.red + "Flight disabled for " + player.getName());
-        }
-    }
-
-    public boolean flyModeEnabled(Player player) {
-        if (player.getAllowFlight()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean currentlyFlying(Player player) {
-        if (player.isFlying()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean isCreative(Player player) {
-        if (player.getGameMode() == GameMode.CREATIVE) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }
