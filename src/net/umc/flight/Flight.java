@@ -1,6 +1,5 @@
 package net.umc.flight;
 
-import net.umc.flight.utils.Utilities;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -9,20 +8,14 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
 
-    private final Utilities utils = new Utilities();
     private final FlightCommands cHandler = new FlightCommands(this);
-    //
-    public static final ChatColor red = ChatColor.RED;
-    public static final ChatColor gray = ChatColor.GRAY;
-    public static final ChatColor green = ChatColor.GREEN;
-    public static final ChatColor white = ChatColor.WHITE;
-    public static final ChatColor yellow = ChatColor.YELLOW;
-    public static final String pre = gray + "[" + green + "Flight" + gray + "] ";
+    public static final String pre = ChatColor.GRAY + "[" + ChatColor.GREEN + "Flight" + ChatColor.GRAY + "] ";
+    public static final String noPerms = pre + ChatColor.RED + "You don't have permission to do this...";
 
     @Override
     public void onEnable() {
-        this.getCommand("flight").setExecutor(this);
-        this.getServer().getPluginManager().registerEvents(new FlightListener(this), this);
+        getCommand("flight").setExecutor(this);
+        getServer().getPluginManager().registerEvents(new FlightListener(), this);
     }
 
     @Override
@@ -36,62 +29,54 @@ public class Flight extends JavaPlugin {
             if (sender.hasPermission("flight.toggle")) {
                 cHandler.quickToggle(sender);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("version".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.version")) {
                 cHandler.versionCommand(sender, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("help".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.help")) {
                 cHandler.helpCommand(sender, label, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("toggle".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.toggle")) {
                 cHandler.toggleCommand(sender, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("on".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.on")) {
                 cHandler.flightOnCommand(sender, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("off".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.off")) {
                 cHandler.flightOffCommand(sender, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("check".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.check")) {
                 cHandler.checkCommand(sender, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else if ("list".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.list")) {
                 cHandler.listCommand(sender, args);
             } else {
-                noPerms(sender);
+                sender.sendMessage(noPerms);
             }
         } else {
             cHandler.helpCommand(sender, label, args);
         }
         
         return true;
-    }
-    
-    public void noPerms(CommandSender sender) {
-        sender.sendMessage(pre + red + "You do not have permission for that command...");
-    }
-    
-    public Utilities getUtils() {
-        return utils;
     }
 }

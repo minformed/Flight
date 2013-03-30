@@ -1,6 +1,6 @@
 name: Flight
 main: net.umc.flight.Flight
-version: 1.3
+version: 1.4
 commands:
   flight:
     description: Flight command.
