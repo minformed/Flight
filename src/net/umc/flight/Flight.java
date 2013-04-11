@@ -27,13 +27,13 @@ public class Flight extends JavaPlugin {
 
         if (args.length == 0) {
             if (sender.hasPermission("flight.toggle")) {
-                cHandler.quickToggle(sender);
+                cHandler.toggleCommand(sender, args);
             } else {
                 sender.sendMessage(noPerms);
             }
         } else if ("version".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.version")) {
-                cHandler.versionCommand(sender, args);
+                cHandler.versionCommand(sender);
             } else {
                 sender.sendMessage(noPerms);
             }
