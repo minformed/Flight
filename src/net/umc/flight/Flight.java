@@ -39,7 +39,7 @@ public class Flight extends JavaPlugin {
             }
         } else if ("help".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.help")) {
-                cHandler.helpCommand(sender, label, args);
+                cHandler.helpCommand(sender, label);
             } else {
                 sender.sendMessage(noPerms);
             }
@@ -74,7 +74,7 @@ public class Flight extends JavaPlugin {
                 sender.sendMessage(noPerms);
             }
         } else {
-            cHandler.helpCommand(sender, label, args);
+            cHandler.helpCommand(sender, label);
         }
         
         return true;
