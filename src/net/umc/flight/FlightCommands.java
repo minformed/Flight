@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
@@ -217,7 +216,7 @@ public class FlightCommands {
         }
     }
 
-    public void listCommand(CommandSender sender, String[] args) {
+    public void listCommand(CommandSender sender) {
 
         StringBuilder sb = new StringBuilder();
         List<String> list = new ArrayList<>();

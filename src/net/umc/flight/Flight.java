@@ -69,7 +69,7 @@ public class Flight extends JavaPlugin {
             }
         } else if ("list".equalsIgnoreCase(args[0])) {
             if (sender.hasPermission("flight.list")) {
-                cHandler.listCommand(sender, args);
+                cHandler.listCommand(sender);
             } else {
                 sender.sendMessage(noPerms);
             }
