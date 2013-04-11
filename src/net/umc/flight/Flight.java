@@ -3,7 +3,6 @@ package net.umc.flight;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Flight extends JavaPlugin {
@@ -19,11 +18,7 @@ public class Flight extends JavaPlugin {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
-        if (sender instanceof Player) {
-            sender = (Player) sender;
-        }
+    public boolean onCommand(final CommandSender sender, final Command cmd, final String label, final String[] args) {
 
         if (args.length == 0) {
             if (sender.hasPermission("flight.toggle")) {
