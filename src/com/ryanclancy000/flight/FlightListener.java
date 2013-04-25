@@ -1,4 +1,4 @@
-package net.umc.flight;
+package com.ryanclancy000.flight;
 
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;

@@ -1,5 +1,7 @@
-package net.umc.flight;
+package com.ryanclancy000.flight;
 
+import java.io.IOException;
+import java.util.logging.Level;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -15,6 +17,16 @@ public class Flight extends JavaPlugin {
     public void onEnable() {
         getCommand("flight").setExecutor(this);
         getServer().getPluginManager().registerEvents(new FlightListener(), this);
+        initMetricsLite();
+    }
+    
+    private void initMetricsLite() {
+        try {
+            MetricsLite metrics = new MetricsLite(this);
+            metrics.start();
+        } catch (IOException e) {
+            getLogger().log(Level.WARNING, "MetricsLite failed to start!");
+        }
     }
 
     @Override

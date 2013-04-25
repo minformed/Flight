@@ -1,4 +1,4 @@
-package net.umc.flight;
+package com.ryanclancy000.flight;
 
 import java.util.ArrayList;
 import java.util.Collections;
