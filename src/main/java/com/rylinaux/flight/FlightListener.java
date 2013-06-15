@@ -10,16 +10,17 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 public class FlightListener implements Listener {
 
     @EventHandler
-    public void onWorldChange(PlayerChangedWorldEvent event) {
-        Player player = event.getPlayer();
-        if (player.getAllowFlight() && !(player.getGameMode() == GameMode.CREATIVE)) {
+    public void onWorldChange(final PlayerChangedWorldEvent event) {
+        final Player player = event.getPlayer();
+        final String toWorld = event.getPlayer().getWorld().getName();
+        if (player.getAllowFlight() && !(player.getGameMode() == GameMode.CREATIVE) && !player.hasPermission("flight.block." + toWorld)) {
             player.setAllowFlight(true);
         }
     }
 
     @EventHandler
     public void onDeath(PlayerDeathEvent event) {
-        Player player = event.getEntity();
+        final Player player = event.getEntity();
         if (player.getAllowFlight() && !(player.getGameMode() == GameMode.CREATIVE)) {
             player.setAllowFlight(true);
         }
