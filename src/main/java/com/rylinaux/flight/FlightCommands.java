@@ -3,6 +3,7 @@ package com.rylinaux.flight;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.command.CommandSender;
@@ -10,13 +11,13 @@ import org.bukkit.entity.Player;
 
 public class FlightCommands {
 
-    private Flight plugin;
+    private final Flight plugin;
 
-    public FlightCommands(Flight instance) {
+    public FlightCommands(final Flight instance) {
         plugin = instance;
     }
 
-    public void helpCommand(CommandSender sender, String label) {
+    public void helpCommand(final CommandSender sender, final String label) {
         sender.sendMessage(ChatColor.WHITE + "--------------------- " + ChatColor.GRAY + "[" + ChatColor.GREEN + " Flight " + ChatColor.GRAY + "]" + ChatColor.WHITE + " ---------------------");
         if (sender.hasPermission("flight.on"))
             sender.sendMessage(ChatColor.GREEN + "/" + label + " on [player]" + ChatColor.WHITE + " - " + ChatColor.GRAY + "Enable flight.");
@@ -30,11 +31,11 @@ public class FlightCommands {
             sender.sendMessage(ChatColor.GREEN + "/" + label + " list" + ChatColor.WHITE + " - " + ChatColor.GRAY + "List flying players flight.");
     }
 
-    public void toggleCommand(CommandSender sender, String[] args) {
+    public void toggleCommand(final CommandSender sender, final String[] args) {
 
         if (args.length == 0) {
             if (sender instanceof Player) {
-                Player player = (Player) sender;
+                final Player player = (Player) sender;
                 if (!isCreative(player)) {
                     if (player.getAllowFlight()) {
                         disableFlight(sender, player);
@@ -49,7 +50,7 @@ public class FlightCommands {
             }
         } else if (args.length == 1) {
             if (sender instanceof Player) {
-                Player player = (Player) sender;
+                final Player player = (Player) sender;
                 if (!isCreative(player)) {
                     if (player.getAllowFlight()) {
                         disableFlight(sender, player);
@@ -64,7 +65,7 @@ public class FlightCommands {
             }
         } else if (args.length == 2) {
             if (sender.hasPermission("flight.toggle.other")) {
-                Player target = plugin.getServer().getPlayer(args[1]);
+                final Player target = plugin.getServer().getPlayer(args[1]);
                 if (target != null) {
                     if (!isCreative(target)) {
                         if (target.getAllowFlight()) {
@@ -86,11 +87,11 @@ public class FlightCommands {
         }
     }
 
-    public void flightOnCommand(CommandSender sender, String[] args) {
+    public void flightOnCommand(final CommandSender sender, final String[] args) {
 
         if (args.length == 1) {
             if (sender instanceof Player) {
-                Player player = (Player) sender;
+                final Player player = (Player) sender;
                 if (!isCreative(player)) {
                     if (!player.getAllowFlight()) {
                         enableFlight(sender, player);
@@ -105,7 +106,7 @@ public class FlightCommands {
             }
         } else if (args.length == 2) {
             if (sender.hasPermission("flight.on.other")) {
-                Player target = plugin.getServer().getPlayer(args[1]);
+                final Player target = plugin.getServer().getPlayer(args[1]);
                 if (target != null) {
                     if (!isCreative(target)) {
                         if (!target.getAllowFlight()) {
@@ -127,11 +128,11 @@ public class FlightCommands {
         }
     }
 
-    public void flightOffCommand(CommandSender sender, String[] args) {
+    public void flightOffCommand(final CommandSender sender, final String[] args) {
 
         if (args.length == 1) {
             if (sender instanceof Player) {
-                Player player = (Player) sender;
+                final Player player = (Player) sender;
                 if (!isCreative(player)) {
                     if (player.getAllowFlight()) {
                         disableFlight(sender, player);
@@ -146,7 +147,7 @@ public class FlightCommands {
             }
         } else if (args.length == 2) {
             if (sender.hasPermission("flight.off.other")) {
-                Player target = plugin.getServer().getPlayer(args[1]);
+                final Player target = plugin.getServer().getPlayer(args[1]);
                 if (target != null) {
                     if (!isCreative(target)) {
                         if (target.getAllowFlight()) {
@@ -168,11 +169,11 @@ public class FlightCommands {
         }
     }
 
-    public void checkCommand(CommandSender sender, String[] args) {
+    public void checkCommand(final CommandSender sender, final String[] args) {
 
         if (args.length == 1) {
             if (sender instanceof Player) {
-                Player player = (Player) sender;
+                final Player player = (Player) sender;
                 if (!isCreative(player)) {
                     if (player.getAllowFlight()) {
                         sender.sendMessage(Flight.pre + ChatColor.GREEN + "Your flight is enabled!");
@@ -187,7 +188,7 @@ public class FlightCommands {
             }
         } else if (args.length == 2) {
             if (sender.hasPermission("flight.check.other")) {
-                Player target = plugin.getServer().getPlayer(args[1]);
+                final Player target = plugin.getServer().getPlayer(args[1]);
                 if (target != null) {
                     if (!isCreative(target)) {
                         if (target.getAllowFlight()) {
@@ -209,12 +210,12 @@ public class FlightCommands {
         }
     }
 
-    public void listCommand(CommandSender sender) {
+    public void listCommand(final CommandSender sender) {
 
-        StringBuilder sb = new StringBuilder();
-        List<String> list = new ArrayList<String>();
+        final StringBuilder sb = new StringBuilder();
+        final List<String> list = new ArrayList<String>();
 
-        for (Player p : plugin.getServer().getOnlinePlayers()) {
+        for (final Player p : plugin.getServer().getOnlinePlayers()) {
             if (p.getAllowFlight() && !isCreative(p)) {
                 list.add(p.getName());
             }
@@ -222,22 +223,18 @@ public class FlightCommands {
 
         Collections.sort(list, String.CASE_INSENSITIVE_ORDER);
 
-        for (String pName : list) {
+        for (final String pName : list) {
             sb.append(pName + " ");
         }
 
         sender.sendMessage(Flight.pre + ChatColor.GRAY + "Flight Mode Enabled: " + sb.toString());
     }
 
-    private boolean isCreative(Player player) {
-        if (player.getGameMode() == GameMode.CREATIVE) {
-            return true;
-        } else {
-            return false;
-        }
+    private boolean isCreative(final Player player) {
+        return player.getGameMode() == GameMode.CREATIVE;
     }
 
-    private void enableFlight(CommandSender sender, Player player) {
+    private void enableFlight(final CommandSender sender, final Player player) {
         player.setAllowFlight(true);
         if (sender.getName().equalsIgnoreCase(player.getName())) {
             player.sendMessage(Flight.pre + ChatColor.GREEN + "Flight enabled!");
@@ -247,7 +244,7 @@ public class FlightCommands {
         }
     }
 
-    private void disableFlight(CommandSender sender, Player player) {
+    private void disableFlight(final CommandSender sender, final Player player) {
         player.setAllowFlight(false);
         player.setFlying(false);
         if (sender.getName().equalsIgnoreCase(player.getName())) {
